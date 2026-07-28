@@ -1,21 +1,20 @@
 import { httpResource } from '@angular/common/http';
-import { Service, Signal } from '@angular/core';
+import { inject, Service, Signal } from '@angular/core';
 import { Flight } from './flight';
 import { initializeFlight } from '../feature-booking/flight-search/flight-search';
+import { ConfigService } from '../../shared/util-common/config-service';
 
 @Service()
 export class FlightClient {
-  private readonly baseUrl = 'https://demo.angulararchitects.io/api';
+  private readonly configService = inject(ConfigService);
 
   findResource(from: Signal<string>, to: Signal<string>) {
     return httpResource<Flight[]>(
       () => {
-
-
         if (!from() || !to()) return undefined;
 
         return {
-          url: `${this.baseUrl}/flight`,
+          url: `${this.configService.baseUrl}/flight`,
           params: {
             from: from(),
             to: to(),
