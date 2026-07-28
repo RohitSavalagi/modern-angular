@@ -10,12 +10,10 @@
     <input [formField]="filterForm.to" id="to" />
   </div>
   <div>
-    <button type="button" (click)="search()" [disabled]="!filter().from || !filter().to">
-      Search
-    </button>
+    <button type="button" (click)="search()">Search</button>
   </div>
 </form>
-@if (flights().length > 0) {
+@if (!error() && flights().length > 0) {
   <table>
     <tr>
       <th>Id</th>
@@ -44,7 +42,21 @@
     }
   </table>
 }
+@if (error()) {
+  <div>Error: {{ error() | json }}</div>
+}
+@if (isLoading()) {
+  <div>Loading...</div>
+}
+@if (error()) {
+  <div>Error: {{ error() | json }}</div>
+}
+
 <p>&nbsp;</p>
 <div>
   <pre>{{ selectedFlight() | json }}</pre>
+</div>
+
+<div>
+  <pre>{{ basket() | json }}</pre>
 </div>
