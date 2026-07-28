@@ -1,3 +1,32 @@
 import { Routes } from '@angular/router';
+import { Home } from './shell/home/home';
+import { FlightEdit } from './domains/ticketing/feature-booking/flight-edit/flight-edit';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'home',
+  },
+  {
+    path: 'home',
+    component: Home,
+  },
+  {
+    path: 'ticketing',
+    loadChildren: () =>
+      import('./domains/ticketing/ticketing.routes').then((m) => m.ticketingRoutes),
+  },
+  {
+    path: 'about',
+    loadComponent: () => import('./shell/about/about').then((c) => c.About),
+  },
+  {
+    path: 'flight-edit/:id',
+    component: FlightEdit,
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
+  },
+];

@@ -1,0 +1,28 @@
+import { Routes } from "@angular/router";
+import { BookingNavigation } from "./feature-booking/booking-navigation";
+import { FlightSearch } from "./feature-booking/flight-search/flight-search";
+import { FlightEdit } from "./feature-booking/flight-edit/flight-edit";
+import { PassengerSearch } from "./feature-booking/passenger-search/passenger-search";
+
+export const ticketingRoutes: Routes = [
+  {
+    path: 'booking',
+    component: BookingNavigation,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'flight-search',
+      },
+      { path: 'flight-search', component: FlightSearch },
+      {
+        path: 'flight-edit/:id',
+        component: FlightEdit,
+      },
+      {
+        path: 'passenger-search',
+        component: PassengerSearch,
+      },
+    ],
+  },
+];

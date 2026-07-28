@@ -1,14 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { form, FormField } from '@angular/forms/signals';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { form, FormField, FormRoot } from '@angular/forms/signals';
 import { Flight } from '../../data/flight';
 import { JsonPipe } from '@angular/common';
 import { httpResource } from '@angular/common/http';
 import { FlightCard } from '../../ui/flight-card/flight-card';
 import { initialAircraft } from '../../data/aircraft';
+import { RouterLink } from "@angular/router";
+import { FlightClient } from '../../data/flight-client';
 
 @Component({
   selector: 'app-flight-search',
-  imports: [FormField, JsonPipe, FlightCard],
+  imports: [FormField, JsonPipe, FlightCard, RouterLink, FormRoot],
   templateUrl: './flight-search.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -18,36 +20,13 @@ export class FlightSearch {
     to: 'Graz',
   });
 
+  private flightClient = inject(FlightClient);
+
   protected readonly filterForm = form(this.filter);
 
   protected readonly selectedFlight = signal<Flight | null>(null);
 
-  protected readonly flightsResource = httpResource<Flight[]>(
-    () => {
-      const filter = {
-        from: this.filter().from,
-        to: this.filter().to,
-      };
-
-      if (!filter.from || !filter.to) return undefined;
-
-      return {
-        url: 'https://demo.angulararchitects.io/api/flight',
-        params: {
-          from: filter.from,
-          to: filter.to,
-        },
-      };
-    },
-    {
-      // TODO: check later
-      defaultValue: [],
-      parse: (raw) => {
-        const flights = raw as Flight[];
-        return flights.map((flight) => initializeFlight(flight));
-      },
-    },
-  );
+  protected readonly flightsResource = this.flightClient.findResource(this.filterForm.from().value, this.filterForm.to().value);
 
   protected readonly flights = this.flightsResource.value;
   protected readonly error = this.flightsResource.error;
@@ -59,7 +38,7 @@ export class FlightSearch {
     toFlightsWithDelays(this.flights(), this.delayInMin()),
   );
 
-  protected readonly flightRoute = computed(() => `${this.filter().from} to ${this.filter().to}`);
+  protected readonly flightRoute = computed(() => `${this.filter().from} - ${this.filter().to}`);
 
   protected search(): void {
     this.flightsResource.reload();
@@ -82,7 +61,7 @@ export class FlightSearch {
   }
 }
 
-function initializeFlight(raw: unknown) {
+export function initializeFlight(raw: unknown) {
   const flight = raw as Flight;
   flight.aircraft = initialAircraft;
   flight.prices = [];

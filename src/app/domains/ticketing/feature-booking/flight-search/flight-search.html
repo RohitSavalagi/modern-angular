@@ -1,6 +1,6 @@
 <h1>Flight Search</h1>
-<h2>Search Route: {{ flightRoute() }}</h2>
-<form>
+
+<form [formRoot]="filterForm">
   <div>
     <label for="from">From:</label>
     <input [formField]="filterForm.from" id="from" />
@@ -13,6 +13,10 @@
     <button type="button" (click)="search()">Search</button>
   </div>
 </form>
+
+<p>{{ flightRoute() }}</p>
+
+
 @if (!error() && flights().length > 0) {
   <div class="row">
     @for (flight of flightsWithDelays(); track flight.id) {
@@ -21,7 +25,9 @@
           [item]="flight"
           [selected]="basket()[flight.id]"
           (selectedChange)="updateBasket(flight.id, $event)"
-        />
+        >
+          <button [routerLink]="['../flight-edit', flight.id, { showDetails: true }]">Edit</button>
+        </app-flight-card>
       </div>
     } @empty {
       <div>No flights found.</div>

@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { Navbar } from './shell/navbar/navbar';
 import { Sidebar } from './shell/sidebar/sidebar';
-import { FlightSearch } from "./domains/ticketing/feature-booking/flight-search/flight-search";
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import { FlightSearch } from "./domains/ticketing/feature-booking/flight-search/
   imports: [
     Navbar,
     Sidebar,
-    FlightSearch
+    RouterOutlet
 ]
 })
 export class App {
