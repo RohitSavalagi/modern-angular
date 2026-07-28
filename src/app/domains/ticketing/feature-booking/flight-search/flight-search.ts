@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 import { Flight } from '../../data/flight';
 import { initialAircraft } from '../../data/aircraft';
 import { DatePipe, JsonPipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-flight-search',
@@ -11,6 +12,8 @@ import { DatePipe, JsonPipe } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FlightSearch {
+  private readonly httpClient = inject(HttpClient);
+
   protected readonly filter = signal({
     from: 'Hamburg',
     to: 'Graz',
@@ -22,40 +25,23 @@ export class FlightSearch {
   protected readonly selectedFlight = signal<Flight | null>(null);
 
   protected search(): void {
-    const date = new Date().toISOString();
+    const url = 'https://demo.angulararchitects.io/api/flight'
 
-    this.flights.set([
-      {
-        id: 1,
-        from: this.filter().from,
-        to: this.filter().to,
-        date,
-        delayed: false,
-        delay: 0,
-        aircraft: { ...initialAircraft },
-        prices: [],
+    const filter = this.filter();
+
+    const params = {
+      from: filter.from,
+      to: filter.to,
+    }
+
+    this.httpClient.get<Flight[]>(url, { params }).subscribe({
+      next: (flights: Flight[]) => {
+        this.flights.set(flights);
       },
-      {
-        id: 2,
-        from: this.filter().from,
-        to: this.filter().to,
-        date,
-        delayed: false,
-        delay: 0,
-        aircraft: { ...initialAircraft },
-        prices: [],
-      },
-      {
-        id: 3,
-        from: this.filter().from,
-        to: this.filter().to,
-        date,
-        delayed: false,
-        delay: 0,
-        aircraft: { ...initialAircraft },
-        prices: [],
-      },
-    ]);
+      error: (err) => {
+        console.error('Error', err)
+      }
+    });
   }
 
   protected select(flight: Flight): void {
