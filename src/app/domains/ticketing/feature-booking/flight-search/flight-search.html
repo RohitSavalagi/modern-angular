@@ -1,5 +1,5 @@
 <h1>Flight Search</h1>
-
+<h2>Search Route: {{ flightRoute() }}</h2>
 <form>
   <div>
     <label for="from">From:</label>
@@ -14,33 +14,19 @@
   </div>
 </form>
 @if (!error() && flights().length > 0) {
-  <table>
-    <tr>
-      <th>Id</th>
-      <th>From</th>
-      <th>To</th>
-      <th>Date</th>
-      <th>Delayed</th>
-    </tr>
-    @for (flight of flights(); track flight.id) {
-      <tr
-        [class.selected]="selectedFlight() === flight"
-        [style.color]="flight.delayed ? 'darkred' : 'black'"
-        (click)="select(flight)"
-        class="selectable"
-      >
-        <td>{{ flight.id }}</td>
-        <td>{{ flight.from }}</td>
-        <td>{{ flight.to }}</td>
-        <td>{{ flight.date | date }}</td>
-        <td>{{ flight.delayed }}</td>
-      </tr>
+  <div class="row">
+    @for (flight of flightsWithDelays(); track flight.id) {
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <app-flight-card
+          [item]="flight"
+          [selected]="basket()[flight.id]"
+          (selectedChange)="updateBasket(flight.id, $event)"
+        />
+      </div>
     } @empty {
-      <tr>
-        <td colspan="5">No flights found.</td>
-      </tr>
+      <div>No flights found.</div>
     }
-  </table>
+  </div>
 }
 @if (error()) {
   <div>Error: {{ error() | json }}</div>

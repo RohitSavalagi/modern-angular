@@ -13,7 +13,8 @@
         "@schematics/angular:component": {
           "style": "none",
           "skipTests": true,
-          "changeDetection": "OnPush"
+          "changeDetection": "OnPush",
+          "standalone": true
         },
         "@schematics/angular:directive": {
           "skipTests": true
