@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { Navbar } from './shell/navbar/navbar';
 import { Sidebar } from './shell/sidebar/sidebar';
+import { FlightSearch } from "./domains/ticketing/feature-booking/flight-search/flight-search";
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,9 @@ import { Sidebar } from './shell/sidebar/sidebar';
   styleUrl: './app.css',
   imports: [
     Navbar,
-    Sidebar
-  ]
+    Sidebar,
+    FlightSearch
+]
 })
 export class App {
   protected readonly title = signal('Flights');
