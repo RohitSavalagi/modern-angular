@@ -31,7 +31,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FlightZodSchema } from '../../data/flight-zod-schema';
 import { extractError } from '../../../shared/util-common/extract-error';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { validateCity, validateRoundTripTree } from '../../data/flight-validators';
+import { validateCityHttp, validateRoundTripTree } from '../../data/flight-validators';
 import { ValidationErrorsPane } from '../../../shared/ui-forms/validation-errors/validation-errors-pane/validation-errors-pane';
 import { aircraftSchema } from '../../data/aircraft-schema';
 import { initialPrice, priceSchema } from '../../data/price-schema';
@@ -118,7 +118,7 @@ export const flightSchema = schema<Flight>((path) => {
   apply(path.aircraft, aircraftSchema);
   applyEach(path.prices, priceSchema);
   validateStandardSchema(path, FlightZodSchema);
-  debounce(path, 'blur');
+  debounce(path, 300);
   required(path.from, { message: 'Please enter the value!' });
   required(path.to);
   required(path.date);
@@ -126,7 +126,8 @@ export const flightSchema = schema<Flight>((path) => {
   validateRoundTripTree(path);
 
   const allowed = ['Graz', 'Hamburg', 'Zürich'];
-  validateCity(path.from, allowed);
+  // validateCity(path.from, allowed);
+  validateCityHttp(path.from);
 
   applyWhenValue(path, (flight) => flight.delayed, delayedFlight);
 });

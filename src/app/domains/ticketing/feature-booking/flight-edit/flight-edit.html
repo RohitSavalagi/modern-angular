@@ -100,3 +100,7 @@
   </table>
   <button (click)="addPrice()" type="button" class="btn btn-default ml3">Add</button>
 </fieldset>
+
+@if (flightForm.from().pending()) {
+  <div>Waiting for Async Validation Result...</div>
+}
