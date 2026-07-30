@@ -57,3 +57,7 @@
 <p>
   {{ flightForm().errorSummary() | json }}
 </p>
+
+@if (flightForm.from().pending()) {
+  <div>Waiting for Async Validation Result...</div>
+}
