@@ -7,7 +7,7 @@ import {
   linkedSignal,
   signal,
 } from '@angular/core';
-import { form, FormField, FormRoot } from '@angular/forms/signals';
+import { debounce, form, FormField, FormRoot } from '@angular/forms/signals';
 import { Flight } from '../../data/flight';
 import { JsonPipe } from '@angular/common';
 import { httpResource } from '@angular/common/http';
@@ -15,6 +15,7 @@ import { FlightCard } from '../../ui/flight-card/flight-card';
 import { initialAircraft } from '../../data/aircraft';
 import { RouterLink } from '@angular/router';
 import { FlightStore } from './flight-store';
+import { delegatedSignal } from '../../../shared/util-common/delegated-signal';
 
 @Component({
   selector: 'app-flight-search',
@@ -24,29 +25,40 @@ import { FlightStore } from './flight-store';
 })
 export class FlightSearch {
   private readonly store = inject(FlightStore);
-  protected readonly filter = linkedSignal(() => ({
-    from: this.store.from(),
-    to: this.store.to(),
-  }));
-  protected readonly filterForm = form(this.filter);
+  protected readonly filter = delegatedSignal(
+    () => ({
+      from: this.store.from(),
+      to: this.store.to(),
+    }),
+    (value) => this.store.updateFilter(value.from, value.to),
+  );
+  protected readonly filterForm = form(this.filter, (path) => {
+    debounce(path.from, 300);
+    debounce(path.to, 300);
+  });
   protected readonly flights = this.store.flightsWithDelays;
   protected readonly isLoading = this.store.flightsIsLoading;
   protected readonly error = this.store.flightsError;
   protected readonly basket = this.store.basket;
   protected readonly flightRoute = computed(() => this.filter().from + ' - ' + this.filter().to);
+
   constructor() {
     this.showError();
   }
+
   protected search(): void {
     this.store.updateFilter(this.filter().from, this.filter().to);
     this.store.reload();
   }
+
   protected updateBasket(flightId: number, selected: boolean): void {
     this.store.updateBasket(flightId, selected);
   }
+
   protected delay(): void {
     this.store.delay();
   }
+
   private showError() {
     effect(() => {
       const error = this.error();
