@@ -4,13 +4,10 @@ import {
   computed,
   effect,
   inject,
-  linkedSignal,
-  signal,
 } from '@angular/core';
 import { debounce, form, FormField, FormRoot } from '@angular/forms/signals';
 import { Flight } from '../../data/flight';
 import { JsonPipe } from '@angular/common';
-import { httpResource } from '@angular/common/http';
 import { FlightCard } from '../../ui/flight-card/flight-card';
 import { initialAircraft } from '../../data/aircraft';
 import { RouterLink } from '@angular/router';
