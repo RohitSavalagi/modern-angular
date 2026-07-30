@@ -23,14 +23,18 @@ import {
   FieldTree,
   applyWhenValue,
   min,
+  apply,
+  applyEach,
 } from '@angular/forms/signals';
 import { JsonPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FlightZodSchema } from '../../data/flight-zod-schema';
 import { extractError } from '../../../shared/util-common/extract-error';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { validateCity, validateCityHttp, validateRoundTrip, validateRoundTripTree } from '../../data/flight-validators';
+import { validateCityHttp, validateRoundTripTree } from '../../data/flight-validators';
 import { ValidationErrorsPane } from '../../../shared/ui-forms/validation-errors/validation-errors-pane/validation-errors-pane';
+import { aircraftSchema } from '../../data/aircraft-schema';
+import { initialPrice, priceSchema } from '../../data/price-schema';
 
 @Component({
   selector: 'app-flight-edit',
@@ -49,6 +53,8 @@ export class FlightEdit {
   protected readonly showDetails = input({
     transform: booleanAttribute,
   });
+
+  protected readonly prices = linkedSignal(() => this.flightForm.prices);
 
   protected readonly flight = linkedSignal(() => normalizeFlight(this.store.flight()));
 
@@ -93,6 +99,11 @@ export class FlightEdit {
     }
   }
 
+  addPrice(): void {
+    const prices = this.prices();
+    prices().value.update((prices) => [...prices, { ...initialPrice }]);
+  }
+
   protected readonly isDisabled = computed(() => this.flightForm().invalid());
 }
 
@@ -104,6 +115,8 @@ function normalizeFlight(flight: Flight): Flight {
 }
 
 export const flightSchema = schema<Flight>((path) => {
+  apply(path.aircraft, aircraftSchema);
+  applyEach(path.prices, priceSchema);
   validateStandardSchema(path, FlightZodSchema);
   debounce(path, 300);
   required(path.from, { message: 'Please enter the value!' });
