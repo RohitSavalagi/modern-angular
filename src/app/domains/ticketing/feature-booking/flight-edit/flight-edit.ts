@@ -15,7 +15,6 @@ import {
   form,
   minLength,
   required,
-  FormField,
   FormRoot,
   schema,
   debounce,
@@ -34,7 +33,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { validateCityHttp, validateDuplicatePrices, validateRoundTripTree } from '../../data/flight-validators';
 import { ValidationErrorsPane } from '../../../shared/ui-forms/validation-errors/validation-errors-pane/validation-errors-pane';
 import { aircraftSchema } from '../../data/aircraft-schema';
-import { initialPrice, priceSchema } from '../../data/price-schema';
+import { priceSchema } from '../../data/price-schema';
 import { FlightForm } from './flight-form/flight-form';
 import { AircraftForm } from './aircraft-form/aircraft-form';
 import { PricesForm } from './prices-form/prices-form';

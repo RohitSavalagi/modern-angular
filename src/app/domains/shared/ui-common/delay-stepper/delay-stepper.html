@@ -1,0 +1,9 @@
+@if (disabled()) {
+  <div class="delay">No Delay!</div>
+} @else {
+  <div class="delay">{{ value() }}</div>
+  <div>
+    <button type="button" (click)="inc()">+15 Minutes</button>
+    <button type="button" (click)="dec()">-15 Minutes</button>
+  </div>
+}
