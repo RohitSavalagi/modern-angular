@@ -5,7 +5,7 @@ import {
   effect,
   inject,
 } from '@angular/core';
-import { debounce, form, FormField, FormRoot } from '@angular/forms/signals';
+import { form, FormField, FormRoot } from '@angular/forms/signals';
 import { Flight } from '../../data/flight';
 import { JsonPipe } from '@angular/common';
 import { FlightCard } from '../../ui/flight-card/flight-card';
@@ -29,10 +29,7 @@ export class FlightSearch {
     }),
     (value) => this.store.updateFilter(value.from, value.to),
   );
-  protected readonly filterForm = form(this.filter, (path) => {
-    debounce(path.from, 300);
-    debounce(path.to, 300);
-  });
+  protected readonly filterForm = form(this.filter);
   protected readonly flights = this.store.flightsWithDelays;
   protected readonly isLoading = this.store.flightsIsLoading;
   protected readonly error = this.store.flightsError;
