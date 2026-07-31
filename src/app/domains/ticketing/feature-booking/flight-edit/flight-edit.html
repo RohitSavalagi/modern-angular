@@ -5,94 +5,20 @@
   <form [formRoot]="flightForm">
     <fieldset>
       <legend>Flight</legend>
-      <div>
-        <label for="flight-id">ID</label>
-        <input [formField]="flightForm.id" type="number" id="flight-id" />
-        <app-validation-errors-pane [errors]="flightForm.id().errors()" />
-      </div>
 
-      <div>
-        <label for="flight-from"> From </label>
-        <input [formField]="flightForm.from" id="flight-from" />
-        <app-validation-errors-pane [errors]="flightForm.from().errors()" />
-      </div>
-
-      <div>
-        <label for="flight-to"> To </label>
-        <input [formField]="flightForm.to" id="flight-to" />
-        <app-validation-errors-pane [errors]="flightForm.to().errors()" />
-      </div>
-
-      <div>
-        <label for="flight-date">Date</label>
-        <div>
-          <input
-            class="form-control"
-            type="datetime-local"
-            [formField]="flightForm.date"
-            id="flight-date"
-          />
-        </div>
-        <app-validation-errors-pane [errors]="flightForm.date().errors()" />
-      </div>
-
-      <div class="form-check">
-        <label class="form-check-label">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            [formField]="flightForm.delayed"
-            id="flight-delayed"
-          />
-          Delayed</label
-        >
-      </div>
+      <app-flight-form [flight]="flightForm"></app-flight-form>
     </fieldset>
-
-    @let aircraftForm = flightForm.aircraft;
 
     <fieldset>
       <legend>Aircraft</legend>
-      <div class="form-group">
-        <label for="type">Type:</label>
-        <input id="type" class="form-control" [formField]="aircraftForm.type" />
-        <app-validation-errors-pane [errors]="aircraftForm.type().errors()" />
-      </div>
-      <div class="form-group">
-        <label for="registration">Registration:</label>
-        <input id="registration" class="form-control" [formField]="aircraftForm.registration" />
-        <app-validation-errors-pane [errors]="aircraftForm.registration().errors()" />
-      </div>
+      <app-aircraft-form [aircraft]="flightForm.aircraft"></app-aircraft-form>
     </fieldset>
 
     @let pricesForm = prices();
     <fieldset>
       <legend>Prices</legend>
       <app-validation-errors-pane [errors]="pricesForm().errors()" />
-      <table class="datagrid">
-        <tr>
-          <th>Flight Class</th>
-          <th>Amount</th>
-          <th></th>
-        </tr>
-        @for (price of pricesForm; track $index) {
-          <tr>
-            <td>
-              <input [formField]="price.flightClass" class="medium" />
-            </td>
-            <td>
-              <input [formField]="price.amount" type="number" class="small" />
-            </td>
-            <td class="error-col">
-              <app-validation-errors-pane
-                [errors]="price().errorSummary()"
-                [showFieldNames]="true"
-              />
-            </td>
-          </tr>
-        }
-      </table>
-      <button (click)="addPrice()" type="button" class="btn btn-default ml3">Add</button>
+      <app-prices-form [prices]="pricesForm"></app-prices-form>
     </fieldset>
 
     <div class="mt-40">

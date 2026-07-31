@@ -35,10 +35,13 @@ import { validateCityHttp, validateDuplicatePrices, validateRoundTripTree } from
 import { ValidationErrorsPane } from '../../../shared/ui-forms/validation-errors/validation-errors-pane/validation-errors-pane';
 import { aircraftSchema } from '../../data/aircraft-schema';
 import { initialPrice, priceSchema } from '../../data/price-schema';
+import { FlightForm } from './flight-form/flight-form';
+import { AircraftForm } from './aircraft-form/aircraft-form';
+import { PricesForm } from './prices-form/prices-form';
 
 @Component({
   selector: 'app-flight-edit',
-  imports: [FormField, JsonPipe, FormRoot, RouterLink, ValidationErrorsPane],
+  imports: [FormField, JsonPipe, FormRoot, RouterLink, ValidationErrorsPane, FlightForm, AircraftForm, PricesForm],
   templateUrl: './flight-edit.html',
 })
 export class FlightEdit {
@@ -97,11 +100,6 @@ export class FlightEdit {
         error: extractError(error),
       };
     }
-  }
-
-  protected addPrice(): void {
-    const prices = this.prices();
-    prices().value.update((prices) => [...prices, { ...initialPrice }]);
   }
 
   protected readonly isDisabled = computed(() => this.flightForm().invalid());
