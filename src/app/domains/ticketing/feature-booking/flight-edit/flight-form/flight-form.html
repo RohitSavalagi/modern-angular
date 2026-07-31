@@ -1,0 +1,42 @@
+<div>
+  <label for="flight-id">ID</label>
+  <input [formField]="flight().id" type="number" id="flight-id" />
+  <app-validation-errors-pane [errors]="flight().id().errors()" />
+</div>
+
+<div>
+  <label for="flight-from"> From </label>
+  <input [formField]="flight().from" id="flight-from" />
+  <app-validation-errors-pane [errors]="flight().from().errors()" />
+</div>
+
+<div>
+  <label for="flight-to"> To </label>
+  <input [formField]="flight().to" id="flight-to" />
+  <app-validation-errors-pane [errors]="flight().to().errors()" />
+</div>
+
+<div>
+  <label for="flight-date">Date</label>
+  <div>
+    <input
+      class="form-control"
+      type="datetime-local"
+      [formField]="flight().date"
+      id="flight-date"
+    />
+  </div>
+  <app-validation-errors-pane [errors]="flight().date().errors()" />
+</div>
+
+<div class="form-check">
+  <label class="form-check-label">
+    <input
+      type="checkbox"
+      class="form-check-input"
+      [formField]="flight().delayed"
+      id="flight-delayed"
+    />
+    Delayed</label
+  >
+</div>
