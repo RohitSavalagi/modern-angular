@@ -41,7 +41,7 @@ import { PricesForm } from './prices-form/prices-form';
 
 @Component({
   selector: 'app-flight-edit',
-  imports: [FormField, JsonPipe, FormRoot, RouterLink, ValidationErrorsPane, FlightForm, AircraftForm, PricesForm],
+  imports: [JsonPipe, FormRoot, RouterLink, ValidationErrorsPane, FlightForm, AircraftForm, PricesForm],
   templateUrl: './flight-edit.html',
 })
 export class FlightEdit {

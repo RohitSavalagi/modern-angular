@@ -2,10 +2,11 @@ import { Component, input } from '@angular/core';
 import { FieldTree, FormField } from '@angular/forms/signals';
 import { Flight } from '../../../data/flight';
 import { ValidationErrorsPane } from "../../../../shared/ui-forms/validation-errors/validation-errors-pane/validation-errors-pane";
+import { FieldMetaDataPane } from '../../../../shared/ui-forms/field-meta-data-pane/field-meta-data-pane';
 
 @Component({
   selector: 'app-flight-form',
-  imports: [FormField, ValidationErrorsPane],
+  imports: [FormField, ValidationErrorsPane, FieldMetaDataPane],
   templateUrl: './flight-form.html',
 })
 export class FlightForm {
