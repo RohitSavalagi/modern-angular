@@ -10,7 +10,7 @@
     <input [formField]="filterForm.to" id="to" />
   </div>
   <div>
-    <button type="button" (click)="search()">Search</button>
+    <button type="button" [disabled]="!filter().from || !filter().to" (click)="search()">Search</button>
   </div>
 </form>
 
