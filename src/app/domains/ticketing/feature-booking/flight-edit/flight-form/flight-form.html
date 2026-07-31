@@ -5,19 +5,27 @@
 </div>
 
 <div>
-  <label for="flight-from"> From </label>
+  <label for="flight-from">
+    From
+    <app-field-meta-data-pane [field]="flight().from"></app-field-meta-data-pane>
+  </label>
   <input [formField]="flight().from" id="flight-from" />
   <app-validation-errors-pane [errors]="flight().from().errors()" />
 </div>
 
 <div>
-  <label for="flight-to"> To </label>
+  <label for="flight-to">
+    To
+    <app-field-meta-data-pane [field]="flight().to"></app-field-meta-data-pane>
+  </label>
   <input [formField]="flight().to" id="flight-to" />
   <app-validation-errors-pane [errors]="flight().to().errors()" />
 </div>
 
 <div>
-  <label for="flight-date">Date</label>
+  <label for="flight-date">
+    Date
+  </label>
   <div>
     <input
       class="form-control"
