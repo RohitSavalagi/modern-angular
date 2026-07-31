@@ -31,7 +31,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FlightZodSchema } from '../../data/flight-zod-schema';
 import { extractError } from '../../../shared/util-common/extract-error';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { validateCityHttp, validateRoundTripTree } from '../../data/flight-validators';
+import { validateCityHttp, validateDuplicatePrices, validateRoundTripTree } from '../../data/flight-validators';
 import { ValidationErrorsPane } from '../../../shared/ui-forms/validation-errors/validation-errors-pane/validation-errors-pane';
 import { aircraftSchema } from '../../data/aircraft-schema';
 import { initialPrice, priceSchema } from '../../data/price-schema';
@@ -99,7 +99,7 @@ export class FlightEdit {
     }
   }
 
-  addPrice(): void {
+  protected addPrice(): void {
     const prices = this.prices();
     prices().value.update((prices) => [...prices, { ...initialPrice }]);
   }
@@ -125,9 +125,10 @@ export const flightSchema = schema<Flight>((path) => {
   minLength(path.from, 3);
   validateRoundTripTree(path);
 
-  const allowed = ['Graz', 'Hamburg', 'Zürich'];
+  // const allowed = ['Graz', 'Hamburg', 'Zürich'];
   // validateCity(path.from, allowed);
   validateCityHttp(path.from);
+  validateDuplicatePrices(path.prices);
 
   applyWhenValue(path, (flight) => flight.delayed, delayedFlight);
 });

@@ -9,6 +9,7 @@ import {
 import { Flight } from './flight';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { delay, map, Observable, of } from 'rxjs';
+import { Price } from './price';
 
 export function validateCity(path: SchemaPath<string>, allowed: string[]) {
   validate(path, (ctx) => {
@@ -135,5 +136,25 @@ export function validateCityHttp(path: SchemaPathTree<string>) {
         kind: 'api-failed',
       };
     },
+  });
+}
+
+export function validateDuplicatePrices(path: SchemaPath<Price[]>) {
+  validate(path, (ctx) => {
+    const prices = ctx.value();
+    const flightClasses = new Set<string>();
+
+    for (const price of prices) {
+      if (flightClasses.has(price.flightClass)) {
+        return {
+          kind: 'duplicateFlightClass',
+          message: 'There can only be one price per flight class',
+          flightClass: price.flightClass,
+        };
+      }
+
+      flightClasses.add(price.flightClass);
+    }
+    return null;
   });
 }

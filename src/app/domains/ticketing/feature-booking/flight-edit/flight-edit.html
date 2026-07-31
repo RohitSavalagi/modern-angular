@@ -3,48 +3,51 @@
 @if (flight().id !== 0) {
   <app-validation-errors-pane [errors]="flightForm().errors()" [showFieldNames]="true" />
   <form [formRoot]="flightForm">
-    <div>
-      <label for="flight-id">ID</label>
-      <input [formField]="flightForm.id" type="number" id="flight-id" />
-      <app-validation-errors-pane [errors]="flightForm.id().errors()" />
-    </div>
-
-    <div>
-      <label for="flight-from"> From </label>
-      <input [formField]="flightForm.from" id="flight-from" />
-      <app-validation-errors-pane [errors]="flightForm.from().errors()" />
-    </div>
-
-    <div>
-      <label for="flight-to"> To </label>
-      <input [formField]="flightForm.to" id="flight-to" />
-      <app-validation-errors-pane [errors]="flightForm.to().errors()" />
-    </div>
-
-    <div>
-      <label for="flight-date">Date</label>
+    <fieldset>
+      <legend>Flight</legend>
       <div>
-        <input
-          class="form-control"
-          type="datetime-local"
-          [formField]="flightForm.date"
-          id="flight-date"
-        />
+        <label for="flight-id">ID</label>
+        <input [formField]="flightForm.id" type="number" id="flight-id" />
+        <app-validation-errors-pane [errors]="flightForm.id().errors()" />
       </div>
-      <app-validation-errors-pane [errors]="flightForm.date().errors()" />
-    </div>
 
-    <div class="form-check">
-      <label class="form-check-label">
-        <input
-          type="checkbox"
-          class="form-check-input"
-          [formField]="flightForm.delayed"
-          id="flight-delayed"
-        />
-        Delayed</label
-      >
-    </div>
+      <div>
+        <label for="flight-from"> From </label>
+        <input [formField]="flightForm.from" id="flight-from" />
+        <app-validation-errors-pane [errors]="flightForm.from().errors()" />
+      </div>
+
+      <div>
+        <label for="flight-to"> To </label>
+        <input [formField]="flightForm.to" id="flight-to" />
+        <app-validation-errors-pane [errors]="flightForm.to().errors()" />
+      </div>
+
+      <div>
+        <label for="flight-date">Date</label>
+        <div>
+          <input
+            class="form-control"
+            type="datetime-local"
+            [formField]="flightForm.date"
+            id="flight-date"
+          />
+        </div>
+        <app-validation-errors-pane [errors]="flightForm.date().errors()" />
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            [formField]="flightForm.delayed"
+            id="flight-delayed"
+          />
+          Delayed</label
+        >
+      </div>
+    </fieldset>
 
     @let aircraftForm = flightForm.aircraft;
 
@@ -62,6 +65,36 @@
       </div>
     </fieldset>
 
+    @let pricesForm = prices();
+    <fieldset>
+      <legend>Prices</legend>
+      <app-validation-errors-pane [errors]="pricesForm().errors()" />
+      <table class="datagrid">
+        <tr>
+          <th>Flight Class</th>
+          <th>Amount</th>
+          <th></th>
+        </tr>
+        @for (price of pricesForm; track $index) {
+          <tr>
+            <td>
+              <input [formField]="price.flightClass" class="medium" />
+            </td>
+            <td>
+              <input [formField]="price.amount" type="number" class="small" />
+            </td>
+            <td class="error-col">
+              <app-validation-errors-pane
+                [errors]="price().errorSummary()"
+                [showFieldNames]="true"
+              />
+            </td>
+          </tr>
+        }
+      </table>
+      <button (click)="addPrice()" type="button" class="btn btn-default ml3">Add</button>
+    </fieldset>
+
     <div class="mt-40">
       <button [disabled]="isDisabled()">Save</button>
     </div>
@@ -73,33 +106,6 @@
 <p>
   {{ flightForm().errorSummary() | json }}
 </p>
-
-@let pricesForm = prices();
-<fieldset>
-  <legend>Prices</legend>
-  <app-validation-errors-pane [errors]="pricesForm().errors()" />
-  <table class="datagrid">
-    <tr>
-      <th>Flight Class</th>
-      <th>Amount</th>
-      <th></th>
-    </tr>
-    @for (price of pricesForm; track $index) {
-      <tr>
-        <td>
-          <input [formField]="price.flightClass" class="medium" />
-        </td>
-        <td>
-          <input [formField]="price.amount" type="number" class="small" />
-        </td>
-        <td class="error-col">
-          <app-validation-errors-pane [errors]="price().errorSummary()" [showFieldNames]="true" />
-        </td>
-      </tr>
-    }
-  </table>
-  <button (click)="addPrice()" type="button" class="btn btn-default ml3">Add</button>
-</fieldset>
 
 @if (flightForm.from().pending()) {
   <div>Waiting for Async Validation Result...</div>
