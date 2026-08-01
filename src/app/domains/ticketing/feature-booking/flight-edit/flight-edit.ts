@@ -8,7 +8,7 @@ import {
   linkedSignal,
   numberAttribute,
 } from '@angular/core';
-import { SimpleFlightDetailStore } from './simple-flight-detail-store';
+import { FlightDetailSignalStore } from './simple-flight-detail-store';
 import { Flight } from '../../data/flight';
 import { toLocalDateTimeString } from '../../../shared/util-common/date-utils';
 import {
@@ -26,9 +26,8 @@ import {
   applyEach,
 } from '@angular/forms/signals';
 import { JsonPipe } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { FlightZodSchema } from '../../data/flight-zod-schema';
-import { extractError } from '../../../shared/util-common/extract-error';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { validateCityHttp, validateDuplicatePrices, validateRoundTripTree } from '../../data/flight-validators';
 import { ValidationErrorsPane } from '../../../shared/ui-forms/validation-errors/validation-errors-pane/validation-errors-pane';
@@ -37,6 +36,7 @@ import { priceSchema } from '../../data/price-schema';
 import { FlightForm } from './flight-form/flight-form';
 import { AircraftForm } from './aircraft-form/aircraft-form';
 import { PricesForm } from './prices-form/prices-form';
+import { FlightSignalStore } from '../flight-search/flight-store';
 
 @Component({
   selector: 'app-flight-edit',
@@ -44,8 +44,8 @@ import { PricesForm } from './prices-form/prices-form';
   templateUrl: './flight-edit.html',
 })
 export class FlightEdit {
-  private readonly store = inject(SimpleFlightDetailStore);
-  private readonly route = inject(ActivatedRoute);
+  private readonly store = inject(FlightDetailSignalStore);
+  private readonly flightStore = inject(FlightSignalStore);
   private readonly snackBar = inject(MatSnackBar);
 
   protected readonly id = input.required({
@@ -58,18 +58,16 @@ export class FlightEdit {
 
   protected readonly prices = linkedSignal(() => this.flightForm.prices);
 
-  protected readonly flight = linkedSignal(() => normalizeFlight(this.store.flight()));
+  protected readonly flight = linkedSignal(() => normalizeFlight(this.store.flightValue()));
+
+  //props added via withMutation
+  protected readonly isPending = this.flightStore.saveFlightIsPending;
+  protected readonly error = this.flightStore.saveFlightError;
+
+
 
   constructor() {
-    effect(() => {
-      console.log('id', this.id());
-      console.log('showDetails', this.showDetails());
-
-      this.route.paramMap.subscribe((paramsMap) => {
-        const flightId = parseInt(paramsMap.get('id') ?? '0');
-        this.store.setFlightId(flightId);
-      });
-    });
+    this.store.connectFlightId(this.id);
   }
 
   protected readonly flightForm = form(this.flight, flightSchema, {
@@ -89,15 +87,15 @@ export class FlightEdit {
     }
   }
 
-  protected async save(form: FieldTree<Flight>) {
-    try {
-      await this.store.saveFlight(form().value());
-      return null;
-    } catch (error) {
-      return {
-        kind: 'processing_error',
-        error: extractError(error),
-      };
+  protected async save(form: FieldTree<Flight>): Promise<void> {
+    const result = await this.flightStore.saveFlight(form().value());
+
+    if (result.status === 'success') {
+      console.log('Flight save successfully');
+    } else if (result.status === 'error') {
+      console.log('Failed to save flight', result.error);
+    } else {
+      console.warn('Mutation was cancelled');
     }
   }
 

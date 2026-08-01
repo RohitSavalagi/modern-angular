@@ -1,11 +1,12 @@
 import { HttpClient, httpResource } from '@angular/common/http';
-import { inject, Service, Signal } from '@angular/core';
+import { inject, Injectable, Signal } from '@angular/core';
 import { Flight, initialFlight } from './flight';
 import { initializeFlight } from '../feature-booking/flight-search/flight-search';
 import { ConfigService } from '../../shared/util-common/config-service';
 import { Observable } from 'rxjs';
+import { concatOp, httpMutation, HttpMutationOptions, rxMutation } from '@angular-architects/ngrx-toolkit';
 
-@Service()
+@Injectable({ providedIn: 'root' })
 export class FlightClient {
   private readonly configService = inject(ConfigService);
   private http = inject(HttpClient);
@@ -73,5 +74,29 @@ export class FlightClient {
     };
 
     return this.http.put<Flight>(url, flight, { headers });
+  }
+
+  createSaveMutation(options: Partial<HttpMutationOptions<Flight, Flight>>) {
+    return httpMutation({
+      ...options,
+      request: (flight: Flight) => ({
+        url: this.configService.baseUrl + `/flight/${flight.id}`,
+        method: 'PUT',
+        body: flight,
+        headers: {
+          Accept: 'application/json',
+        },
+      }),
+      operator: concatOp,
+    })
+  }
+
+
+  createSaveRxMutation(options: Partial<HttpMutationOptions<Flight, Flight>>) {
+    return rxMutation({
+      ...options,
+      operation: (flight: Flight) => this.update(flight),
+      operator: concatOp,
+    })
   }
 }

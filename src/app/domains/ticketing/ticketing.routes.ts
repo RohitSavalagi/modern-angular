@@ -3,6 +3,8 @@ import { BookingNavigation } from "./feature-booking/booking-navigation";
 import { FlightSearch } from "./feature-booking/flight-search/flight-search";
 import { FlightEdit } from "./feature-booking/flight-edit/flight-edit";
 import { PassengerSearch } from "./feature-booking/passenger-search/passenger-search";
+import { PassengerEdit } from "./feature-booking/passenger-edit/passenger-edit";
+import { passengerResolver } from "./feature-booking/passenger-edit/passenger-resolver";
 
 export const ticketingRoutes: Routes = [
   {
@@ -22,6 +24,13 @@ export const ticketingRoutes: Routes = [
       {
         path: 'passenger-search',
         component: PassengerSearch,
+      },
+      {
+        path: 'passenger-edit/:id',
+        component: PassengerEdit,
+        resolve: {
+          passenger: passengerResolver,
+        },
       },
     ],
   },
