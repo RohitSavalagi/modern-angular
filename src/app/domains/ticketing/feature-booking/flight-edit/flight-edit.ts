@@ -28,7 +28,6 @@ import {
 import { JsonPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FlightZodSchema } from '../../data/flight-zod-schema';
-import { extractError } from '../../../shared/util-common/extract-error';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { validateCityHttp, validateDuplicatePrices, validateRoundTripTree } from '../../data/flight-validators';
 import { ValidationErrorsPane } from '../../../shared/ui-forms/validation-errors/validation-errors-pane/validation-errors-pane';
@@ -37,6 +36,7 @@ import { priceSchema } from '../../data/price-schema';
 import { FlightForm } from './flight-form/flight-form';
 import { AircraftForm } from './aircraft-form/aircraft-form';
 import { PricesForm } from './prices-form/prices-form';
+import { FlightSignalStore } from '../flight-search/flight-store';
 
 @Component({
   selector: 'app-flight-edit',
@@ -45,6 +45,7 @@ import { PricesForm } from './prices-form/prices-form';
 })
 export class FlightEdit {
   private readonly store = inject(SimpleFlightDetailStore);
+  private readonly flightStore = inject(FlightSignalStore);
   private readonly route = inject(ActivatedRoute);
   private readonly snackBar = inject(MatSnackBar);
 
@@ -59,6 +60,12 @@ export class FlightEdit {
   protected readonly prices = linkedSignal(() => this.flightForm.prices);
 
   protected readonly flight = linkedSignal(() => normalizeFlight(this.store.flight()));
+
+  //props added via withMutation
+  protected readonly isPending = this.flightStore.saveFlightIsPending;
+  protected readonly error = this.flightStore.saveFlightError;
+
+
 
   constructor() {
     effect(() => {
@@ -89,15 +96,15 @@ export class FlightEdit {
     }
   }
 
-  protected async save(form: FieldTree<Flight>) {
-    try {
-      await this.store.saveFlight(form().value());
-      return null;
-    } catch (error) {
-      return {
-        kind: 'processing_error',
-        error: extractError(error),
-      };
+  protected async save(form: FieldTree<Flight>): Promise<void> {
+    const result = await this.flightStore.saveFlight(form().value());
+
+    if (result.status === 'success') {
+      console.log('Flight save successfully');
+    } else if (result.status === 'error') {
+      console.log('Failed to save flight', result.error);
+    } else {
+      console.warn('Mutation was cancelled');
     }
   }
 

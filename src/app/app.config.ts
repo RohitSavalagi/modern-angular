@@ -8,7 +8,7 @@ import {
 } from '@angular/router';
 
 import { routes } from './app.routes';
-import { BrowserLanguageService, LanguageService } from './domains/shared/util-common/language.ts';
+import { BrowserLanguageService, LanguageService } from './domains/shared/util-common/language';
 import { provideSignalFormsConfig } from '@angular/forms/signals';
 
 export const appConfig: ApplicationConfig = {

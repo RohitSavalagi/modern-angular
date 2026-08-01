@@ -4,6 +4,7 @@ import {
   computed,
   effect,
   inject,
+  linkedSignal,
 } from '@angular/core';
 import { form, FormField, FormRoot } from '@angular/forms/signals';
 import { Flight } from '../../data/flight';
@@ -11,8 +12,7 @@ import { JsonPipe } from '@angular/common';
 import { FlightCard } from '../../ui/flight-card/flight-card';
 import { initialAircraft } from '../../data/aircraft';
 import { RouterLink } from '@angular/router';
-import { FlightStore } from './flight-store';
-import { delegatedSignal } from '../../../shared/util-common/delegated-signal';
+import { FlightSignalStore } from './flight-store';
 
 @Component({
   selector: 'app-flight-search',
@@ -21,19 +21,20 @@ import { delegatedSignal } from '../../../shared/util-common/delegated-signal';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FlightSearch {
-  private readonly store = inject(FlightStore);
-  protected readonly filter = delegatedSignal(
+  private readonly store = inject(FlightSignalStore);
+  protected readonly filter = linkedSignal(
     () => ({
       from: this.store.from(),
       to: this.store.to(),
-    }),
-    (value) => this.store.updateFilter(value.from, value.to),
+    })
   );
   protected readonly filterForm = form(this.filter);
-  protected readonly flights = this.store.flightsWithDelays;
+
+  protected readonly flights = this.store.flightsWithDelay;
   protected readonly isLoading = this.store.flightsIsLoading;
   protected readonly error = this.store.flightsError;
   protected readonly basket = this.store.basket;
+
   protected readonly flightRoute = computed(() => this.filter().from + ' - ' + this.filter().to);
 
   constructor() {
@@ -42,7 +43,6 @@ export class FlightSearch {
 
   protected search(): void {
     this.store.updateFilter(this.filter().from, this.filter().to);
-    this.store.reload();
   }
 
   protected updateBasket(flightId: number, selected: boolean): void {
