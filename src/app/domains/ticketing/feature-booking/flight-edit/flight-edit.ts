@@ -8,7 +8,7 @@ import {
   linkedSignal,
   numberAttribute,
 } from '@angular/core';
-import { SimpleFlightDetailStore } from './simple-flight-detail-store';
+import { FlightDetailSignalStore } from './simple-flight-detail-store';
 import { Flight } from '../../data/flight';
 import { toLocalDateTimeString } from '../../../shared/util-common/date-utils';
 import {
@@ -26,7 +26,7 @@ import {
   applyEach,
 } from '@angular/forms/signals';
 import { JsonPipe } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { FlightZodSchema } from '../../data/flight-zod-schema';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { validateCityHttp, validateDuplicatePrices, validateRoundTripTree } from '../../data/flight-validators';
@@ -44,9 +44,8 @@ import { FlightSignalStore } from '../flight-search/flight-store';
   templateUrl: './flight-edit.html',
 })
 export class FlightEdit {
-  private readonly store = inject(SimpleFlightDetailStore);
+  private readonly store = inject(FlightDetailSignalStore);
   private readonly flightStore = inject(FlightSignalStore);
-  private readonly route = inject(ActivatedRoute);
   private readonly snackBar = inject(MatSnackBar);
 
   protected readonly id = input.required({
@@ -59,7 +58,7 @@ export class FlightEdit {
 
   protected readonly prices = linkedSignal(() => this.flightForm.prices);
 
-  protected readonly flight = linkedSignal(() => normalizeFlight(this.store.flight()));
+  protected readonly flight = linkedSignal(() => normalizeFlight(this.store.flightValue()));
 
   //props added via withMutation
   protected readonly isPending = this.flightStore.saveFlightIsPending;
@@ -68,15 +67,7 @@ export class FlightEdit {
 
 
   constructor() {
-    effect(() => {
-      console.log('id', this.id());
-      console.log('showDetails', this.showDetails());
-
-      this.route.paramMap.subscribe((paramsMap) => {
-        const flightId = parseInt(paramsMap.get('id') ?? '0');
-        this.store.setFlightId(flightId);
-      });
-    });
+    this.store.connectFlightId(this.id);
   }
 
   protected readonly flightForm = form(this.flight, flightSchema, {

@@ -25,7 +25,8 @@ export interface FlightSearchState {
 export const FlightSignalStore = signalStore(
   { providedIn: 'root' },
 
-  withDevToolsForDebugMode('flight'),
+  // withDevToolsForDebugMode('flight'),
+  withDevtools('Flights'),
 
   withState<FlightSearchState>({
     from: 'Graz',
