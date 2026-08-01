@@ -1,6 +1,6 @@
-import { Service } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-@Service()
+@Injectable({ providedIn: 'root' })
 export class ConfigService {
   readonly baseUrl = 'https://demo.angulararchitects.io/api';
 }

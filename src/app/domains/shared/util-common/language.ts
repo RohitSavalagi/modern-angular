@@ -1,16 +1,16 @@
-import { Service } from '@angular/core';
+import { Injectable } from '@angular/core';
 export abstract class LanguageService {
   abstract getUserLang(): string;
 }
 
-@Service({ autoProvided: false })
+@Injectable({ providedIn: 'root' })
 export class DefaultLanguageService implements LanguageService {
   getUserLang(): string {
     return 'en (default)';
   }
 }
 
-@Service({ autoProvided: false })
+@Injectable({ providedIn: 'root' })
 export class BrowserLanguageService implements LanguageService {
   getUserLang(): string {
     return navigator.language + ' (browser)';

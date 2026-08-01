@@ -3,6 +3,7 @@ const eslint = require('@eslint/js');
 const { defineConfig } = require('eslint/config');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
+const sherriff = require('@softarc/eslint-plugin-sheriff')
 
 module.exports = defineConfig([
   {
@@ -38,4 +39,8 @@ module.exports = defineConfig([
     extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
     rules: {},
   },
+  {
+    files: ['**/*.ts'],
+    extends: [sherriff.configs.all]
+  }
 ]);
