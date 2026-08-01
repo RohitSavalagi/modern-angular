@@ -18,6 +18,13 @@ export const routes: Routes = [
       import('./domains/ticketing/ticketing.routes').then((m) => m.ticketingRoutes),
   },
   {
+    path: 'luggage',
+    loadComponent: () =>
+      import('./domains/luggage/feature-luggage/luggage-overview/luggage-overview').then(
+        (m) => m.LuggageOverview,
+      ),
+  },
+  {
     path: 'about',
     loadComponent: () => import('./shell/about/about').then((c) => c.About),
   },
