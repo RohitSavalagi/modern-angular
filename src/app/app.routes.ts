@@ -13,6 +13,13 @@ export const routes: Routes = [
     component: Home,
   },
   {
+    path: 'next-flights',
+    loadChildren: () =>
+      import('./domains/ticketing/feature-next-flights/next-flights.module').then(
+        (m) => m.NextFlightsModule,
+      ),
+  },
+  {
     path: 'ticketing',
     loadChildren: () =>
       import('./domains/ticketing/ticketing.routes').then((m) => m.ticketingRoutes),
