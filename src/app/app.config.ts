@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
 import {
   PreloadAllModules,
   provideRouter,
@@ -10,10 +10,15 @@ import {
 import { routes } from './app.routes';
 import { BrowserLanguageService, LanguageService } from './domains/shared/util-common/language';
 import { provideSignalFormsConfig } from '@angular/forms/signals';
+import { ConfigService } from '@flight/shared/util-common/config-service';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from '@flight/shared/util-auth/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
+    provideAppInitializer(() => inject(ConfigService).load()),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideSignalFormsConfig({
       classes: {
         'ng-invalid': (field) => field.state().invalid(),

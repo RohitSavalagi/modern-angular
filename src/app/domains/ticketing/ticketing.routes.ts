@@ -5,11 +5,19 @@ import { FlightEdit } from "./feature-booking/flight-edit/flight-edit";
 import { PassengerSearch } from "./feature-booking/passenger-search/passenger-search";
 import { PassengerEdit } from "./feature-booking/passenger-edit/passenger-edit";
 import { passengerResolver } from "./feature-booking/passenger-edit/passenger-resolver";
+import { provideEnvironmentInitializer } from "@angular/core";
+import { authGuard } from "@flight/shared/util-auth/auth.guard";
+import { exitGuard } from "@flight/shared/ui-common/exit.guard";
 
 export const ticketingRoutes: Routes = [
   {
     path: 'booking',
     component: BookingNavigation,
+    providers: [
+      provideEnvironmentInitializer(() => {
+        console.log('init bookingRoutes');
+      })
+    ],
     children: [
       {
         path: '',
@@ -20,6 +28,8 @@ export const ticketingRoutes: Routes = [
       {
         path: 'flight-edit/:id',
         component: FlightEdit,
+        canActivate: [authGuard],
+        canDeactivate: [exitGuard],
       },
       {
         path: 'passenger-search',

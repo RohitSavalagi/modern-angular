@@ -29,7 +29,11 @@ import { JsonPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FlightZodSchema } from '../../data/flight-zod-schema';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { validateCityHttp, validateDuplicatePrices, validateRoundTripTree } from '../../data/flight-validators';
+import {
+  validateCityHttp,
+  validateDuplicatePrices,
+  validateRoundTripTree,
+} from '../../data/flight-validators';
 import { ValidationErrorsPane } from '../../../shared/ui-forms/validation-errors/validation-errors-pane/validation-errors-pane';
 import { aircraftSchema } from '../../data/aircraft-schema';
 import { priceSchema } from '../../data/price-schema';
@@ -40,7 +44,15 @@ import { FlightSignalStore } from '../flight-search/flight-store';
 
 @Component({
   selector: 'app-flight-edit',
-  imports: [JsonPipe, FormRoot, RouterLink, ValidationErrorsPane, FlightForm, AircraftForm, PricesForm],
+  imports: [
+    JsonPipe,
+    FormRoot,
+    RouterLink,
+    ValidationErrorsPane,
+    FlightForm,
+    AircraftForm,
+    PricesForm,
+  ],
   templateUrl: './flight-edit.html',
 })
 export class FlightEdit {
@@ -58,13 +70,13 @@ export class FlightEdit {
 
   protected readonly prices = linkedSignal(() => this.flightForm.prices);
 
-  protected readonly flight = linkedSignal(() => normalizeFlight(this.store.flightValue()));
+  protected readonly flight = linkedSignal(() =>
+    normalizeFlight(this.store.flightValue()),
+  );
 
   //props added via withMutation
   protected readonly isPending = this.flightStore.saveFlightIsPending;
   protected readonly error = this.flightStore.saveFlightError;
-
-
 
   constructor() {
     this.store.connectFlightId(this.id);
@@ -100,6 +112,10 @@ export class FlightEdit {
   }
 
   protected readonly isDisabled = computed(() => this.flightForm().invalid());
+
+  isDirty(): boolean {
+    return this.flightForm().dirty();
+  }
 }
 
 function normalizeFlight(flight: Flight): Flight {
