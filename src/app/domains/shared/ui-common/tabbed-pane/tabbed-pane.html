@@ -1,0 +1,16 @@
+<div class="pane">
+  <div class="tabs-header" role="group">
+    @for (tab of tabs(); track tab) {
+      <button
+        class="tab-button"
+        [class.active]="tab === currentTab()"
+        (click)="activate($index)"
+      >
+        {{ tab.title() }}
+      </button>
+    }
+  </div>
+  <div class="tabs-content">
+    <ng-content></ng-content>
+  </div>
+</div>
