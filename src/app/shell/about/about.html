@@ -1,5 +1,5 @@
 <h1>About</h1>
-<app-tabbed-pane>
+<app-tabbed-pane #pane>
   <app-tab title="Upcoming Flights">
     <p>No upcoming flights!</p>
   </app-tab>
@@ -10,3 +10,5 @@
     <p>No cancelled flights!</p>
   </app-tab>
 </app-tabbed-pane>
+
+<button type="button" (click)="pane.activate(1)">Activate 2nd tab</button>

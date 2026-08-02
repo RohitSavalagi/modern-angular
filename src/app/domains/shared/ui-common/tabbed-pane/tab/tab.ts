@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { TabbedPane } from '../tabbed-pane';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { TabInfo, TabRegistry } from '../../service-tabbed-pane/tab-registry';
 
 @Component({
   selector: 'app-tab',
@@ -7,15 +7,15 @@ import { TabbedPane } from '../tabbed-pane';
   templateUrl: './tab.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Tab {
-  private _pane?: TabbedPane;
+export class Tab implements TabInfo {
+  private registry = inject(TabRegistry);
   readonly title = input.required<string>();
 
   protected readonly visible = computed(() => {
-    return this._pane?.currentTab() === this;
+    return this.registry?.currentTab() === this;
   });
 
-  set pane(pane: TabbedPane) {
-    this._pane = pane;
+  constructor() {
+    this.registry.registerTab(this);
   }
 }

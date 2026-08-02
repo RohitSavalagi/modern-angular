@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, inject, model, signal } from '@angular/core';
-import { Tab } from './tab/tab';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { TabRegistry } from '../service-tabbed-pane/tab-registry';
 
 @Component({
   selector: 'app-tabbed-pane',
   templateUrl: './tabbed-pane.html',
+  providers: [TabRegistry],
   styles: `
     .pane {
       display: flex;
@@ -54,21 +55,12 @@ import { Tab } from './tab/tab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabbedPane {
-  protected readonly tabs = contentChildren(Tab);
-  protected readonly current = model(0);
+  protected readonly registry = inject(TabRegistry);
+  protected readonly tabs = this.registry.tabs;
 
-  readonly currentTab = computed(() => this.tabs()[this.current()]);
-
-
-  constructor() {
-    effect(() => {
-      for (const tab of this.tabs()) {
-        tab.pane = this;
-      }
-    })
-  }
+  protected readonly currentTab = this.registry.currentTab;
 
   activate(tabIndex: number): void {
-    this.current.set(tabIndex);
+    this.registry.activate(tabIndex);
   }
 }
