@@ -12,3 +12,49 @@
 </app-tabbed-pane>
 
 <button type="button" (click)="pane.activate(1)">Activate 2nd tab</button>
+<button type="button" appClickWithWarning>Delete All!</button>
+
+<button (appClickWithWarning)="deleteAll()" #cww="clickWithWarning">
+  Delete All!
+</button>
+<button (click)="cww.handleClick(true)">Don't ask questions!</button>
+
+<br />
+<button
+  appSimpleTooltip="Click here to book the flight"
+  class="btn btn-default">
+  Book Flight
+</button>
+
+<br />
+
+<input
+  [appTooltip]="tmpl"
+  placeholder="Passenger Name"
+  style="max-width: 200px"
+/>
+
+<ng-template
+  #tmpl
+  let-title="$implicit"
+  let-body="text"
+>
+  <div class="tooltip">
+    <h4>{{ title }}</h4>
+    <p>{{ body }}</p>
+  </div>
+</ng-template>
+
+
+<app-data-table [data]="flights()">
+  <div *appTableField="let data; provide: 'id'; title: 'Flight Id'">
+    {{ data }}
+  </div>
+  <div *appTableField="let data; provide: 'from'; title: 'From'">
+    {{ data }}
+  </div>
+  <div *appTableField="let data; provide: 'to'; title: 'To'">{{ data }}</div>
+  <div *appTableField="let data; provide: 'date'; title: 'Departure Date'">
+    {{ data | date: 'dd.MM.yyyy HH:mm' }}
+  </div>
+</app-data-table>
