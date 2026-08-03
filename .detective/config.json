@@ -1,0 +1,33 @@
+{
+  "scopes": [
+    "src/environments",
+    "src/app/domains/shared/ui-assistant",
+    "src/app/domains/shared/ui-common",
+    "src/app/domains/shared/ui-forms",
+    "src/app/domains/shared/util-auth",
+    "src/app/domains/shared/util-common",
+    "src/app/shell"
+  ],
+  "groups": [
+    "src/app/domains/shared",
+    "src/app/domains",
+    "src/app",
+    "src"
+  ],
+  "entries": [],
+  "filter": {
+    "files": [],
+    "logs": []
+  },
+  "aliases": {},
+  "teams": {
+    "example-team-a": [
+      "John Doe",
+      "Jane Doe"
+    ],
+    "example-team-b": [
+      "Max Muster",
+      "Susi Sorglos"
+    ]
+  }
+}
