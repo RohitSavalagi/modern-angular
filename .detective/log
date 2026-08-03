@@ -1,0 +1,352 @@
+"rosa0922 <rohit.savalagi@netcracker.com>,Mon Aug 3 12:23:59 2026 +0530	e1857a5bc2ba533ea1fa475fa442f383fa02a4d3,feat: add AI assistant chat component and related functionality"
+2	1	angular.json
+24	0	messages.xmb
+73	2	package-lock.json
+1	0	package.json
+22	2	src/app/app.config.ts
+3	0	src/app/app.html
+2	1	src/app/app.ts
+237	0	src/app/domains/shared/ui-assistant/assistant-chat/assistant-chat.css
+108	0	src/app/domains/shared/ui-assistant/assistant-chat/assistant-chat.html
+66	0	src/app/domains/shared/ui-assistant/assistant-chat/assistant-chat.ts
+39	0	src/app/domains/shared/ui-assistant/chat-messages/chat-messages.css
+49	0	src/app/domains/shared/ui-assistant/chat-messages/chat-messages.html
+70	0	src/app/domains/shared/ui-assistant/chat-messages/chat-messages.ts
+26	0	src/app/domains/shared/ui-assistant/chat-registry.ts
+12	0	src/app/domains/shared/ui-assistant/message-widget.ts
+11	0	src/app/domains/shared/ui-assistant/message.ts
+26	0	src/app/domains/shared/ui-assistant/tool-status.ts
+49	0	src/app/domains/ticketing/ai/system-prompt.ts
+45	0	src/app/domains/ticketing/ai/ticketing-chat-service.ts
+19	0	src/app/domains/ticketing/ai/tools/display-flight-detail.tool.ts
+28	0	src/app/domains/ticketing/ai/tools/find-flights.tool.ts
+21	0	src/app/domains/ticketing/ai/tools/get-booked-flights.tool.ts
+18	0	src/app/domains/ticketing/ai/tools/get-current-basket.tool.ts
+22	0	src/app/domains/ticketing/ai/tools/get-current-flight.tool.ts
+16	0	src/app/domains/ticketing/ai/tools/get-current-route.tool.ts
+26	0	src/app/domains/ticketing/ai/tools/get-loaded-flights.tool.ts
+19	0	src/app/domains/ticketing/ai/tools/show-booked-flights.tool.ts
+20	0	src/app/domains/ticketing/ai/tools/toggle-flight-selection.tool.ts
+57	0	src/app/domains/ticketing/ai/tools/update-flight.tool.ts
+62	0	src/app/domains/ticketing/ai/widgets/flight-widget.component.ts
+113	0	src/app/domains/ticketing/ai/widgets/flight-widget.ts
+17	0	src/app/domains/ticketing/data/flight-info.ts
+1	2	src/app/domains/ticketing/feature-booking/flight-search/flight-search.html
+12	1	src/app/domains/ticketing/ticketing.routes.ts
+3	2	src/main.ts
+3	7	tsconfig.app.json
+5	1	tsconfig.spec.json
+
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Sun Aug 2 20:05:03 2026 +0530	e025d16c937afaeac1e5b216d6eaab671b1b2ef7,Merge pull request #15 from RohitSavalagi/attr-directive"
+"rosa0922 <rohit.savalagi@netcracker.com>,Sun Aug 2 20:04:19 2026 +0530	99c51e8c92de5cc89ecf43e9e35271437976f279,feat: add SVG logo, config service, and loading spinner; enhance app configuration and routing"
+39	0	public/angular-architects-white.svg
+4	0	public/config.json
+6	1	src/app/app.config.ts
+5	0	src/app/app.html
+22	9	src/app/app.ts
+36	0	src/app/domains/shared/ui-common/custom-template-outlet.directive.ts
+39	0	src/app/domains/shared/ui-common/data-table/data-table.ts
+13	0	src/app/domains/shared/ui-common/data-table/table-field.ts
+23	0	src/app/domains/shared/util-auth/auth.guard.ts
+28	0	src/app/domains/shared/util-auth/auth.interceptor.ts
+10	0	src/app/domains/shared/util-auth/auth.service.ts
+26	2	src/app/domains/shared/util-common/config-service.ts
+21	5	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.ts
+10	0	src/app/domains/ticketing/ticketing.routes.ts
+14	0	src/app/shell/about/about.html
+54	8	src/app/shell/about/about.ts
+
+"rosa0922 <rohit.savalagi@netcracker.com>,Sun Aug 2 16:27:53 2026 +0530	632e81e618ca76f0f19b8207e13dad6e518b21a7,feat: Attribute directive"
+35	0	src/app/domains/shared/ui-common/click-with-warning.directive.ts
+61	0	src/app/domains/shared/ui-common/simple-tooltip.directive.ts
+82	0	src/app/domains/shared/ui-common/tooltip.directive.ts
+32	0	src/app/shell/about/about.html
+9	2	src/app/shell/about/about.ts
+
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Sun Aug 2 14:23:39 2026 +0530	563a292597a389c81cbf495a563e2da977c08ce2,Merge pull request #14 from RohitSavalagi/cmn-via-service"
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Sun Aug 2 13:10:50 2026 +0530	f0e8daa997b733695face80809125710321ab52d,feat: implement TabRegistry for managing tabs and update Tab and TabbedPane components"
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Sun Aug 2 13:10:50 2026 +0530	6c6b05165ede988229a5659e40426cdf7706ec92,Merge pull request #13 from RohitSavalagi/signal-quries"
+"rosa0922 <rohit.savalagi@netcracker.com>,Sun Aug 2 13:09:06 2026 +0530	da8677333b8dd5dfbc5620b568936b52ddb39198,feat: implement tabbed pane component with dynamic tabs"
+5	0	src/app/domains/shared/ui-common/tabbed-pane/tab/tab.html
+21	0	src/app/domains/shared/ui-common/tabbed-pane/tab/tab.ts
+16	0	src/app/domains/shared/ui-common/tabbed-pane/tabbed-pane.html
+74	0	src/app/domains/shared/ui-common/tabbed-pane/tabbed-pane.ts
+12	1	src/app/shell/about/about.html
+3	1	src/app/shell/about/about.ts
+
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Sun Aug 2 00:14:54 2026 +0530	963a473eb8d7363d40882ed175dd883964e49eaa,Merge pull request #12 from RohitSavalagi/entities"
+"rosa0922 <rohit.savalagi@netcracker.com>,Sun Aug 2 00:03:47 2026 +0530	43277cf81ad63adebd4e2ca20a0b1c5a7ac229eb,feat: entities"
+7	0	src/app/app.routes.ts
+52	0	src/app/domains/ticketing/data/ticket-client.ts
+20	0	src/app/domains/ticketing/feature-next-flights/next-flights-overview/next-flights-overview.html
+37	0	src/app/domains/ticketing/feature-next-flights/next-flights-overview/next-flights-overview.ts
+72	0	src/app/domains/ticketing/feature-next-flights/next-flights-overview/next-flights-store.ts
+131	0	src/app/domains/ticketing/feature-next-flights/next-flights-overview/normalized-store.ts
+24	0	src/app/domains/ticketing/feature-next-flights/next-flights-overview/simple-next-flights-store.ts
+16	0	src/app/domains/ticketing/feature-next-flights/next-flights.module.ts
+10	0	src/app/domains/ticketing/feature-next-flights/next-flights.routes.ts
+10	0	src/app/shell/dashboard/dashboard.ts
+5	0	src/app/shell/sidebar/sidebar.html
+
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Sat Aug 1 23:40:15 2026 +0530	8fda715c4b57701bc9f64bdddd73cd3f6f32b85f,Merge pull request #11 from RohitSavalagi/first-singal-store"
+"rosa0922 <rohit.savalagi@netcracker.com>,Sat Aug 1 23:39:20 2026 +0530	768fff8bd347f3dce884e3c607bb4753da4d119e,feat: refactor flight detail store to use signal store and update flight handling"
+5	14	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.ts
+67	57	src/app/domains/ticketing/feature-booking/flight-edit/simple-flight-detail-store.ts
+2	1	src/app/domains/ticketing/feature-booking/flight-search/flight-store.ts
+
+"rosa0922 <rohit.savalagi@netcracker.com>,Sat Aug 1 23:13:10 2026 +0530	5a63fd0e2ac58183022a2d6ebb6a4dc4fbdaaf18,feat: rxMethod"
+31	0	src/app/domains/shared/ui-common/confirm.ts
+33	0	src/app/domains/shared/ui-common/exit.guard.ts
+30	0	src/app/domains/shared/util-common/call-state.feature.ts
+27	0	src/app/domains/shared/util-common/with-previous-value.ts
+114	0	src/app/domains/ticketing/data/passenger-client.ts
+10	0	src/app/domains/ticketing/data/passenger-schema.ts
+15	0	src/app/domains/ticketing/data/passenger.ts
+22	0	src/app/domains/ticketing/feature-booking/passenger-card/passenger-card.html
+27	0	src/app/domains/ticketing/feature-booking/passenger-card/passenger-card.ts
+83	0	src/app/domains/ticketing/feature-booking/passenger-edit/passenger-detail-store.ts
+61	0	src/app/domains/ticketing/feature-booking/passenger-edit/passenger-edit.html
+74	0	src/app/domains/ticketing/feature-booking/passenger-edit/passenger-edit.ts
+34	0	src/app/domains/ticketing/feature-booking/passenger-edit/passenger-resolver.ts
+34	1	src/app/domains/ticketing/feature-booking/passenger-search/passenger-search.html
+60	3	src/app/domains/ticketing/feature-booking/passenger-search/passenger-search.ts
+79	0	src/app/domains/ticketing/feature-booking/passenger-search/passenger-store.ts
+54	0	src/app/domains/ticketing/feature-booking/passenger-search/simple-passenger-store.ts
+9	0	src/app/domains/ticketing/ticketing.routes.ts
+
+"rosa0922 <rohit.savalagi@netcracker.com>,Sat Aug 1 22:29:10 2026 +0530	d0ed3d615fff0a0a74b094f69cd403c49f713e8e,Merge branch 'first-singal-store' of https://github.com/RohitSavalagi/modern-angular into first-singal-store"
+"rosa0922 <rohit.savalagi@netcracker.com>,Sat Aug 1 22:28:31 2026 +0530	d14fdcc67b5fd28c6a98a31a6b470a9b2c69ea95,feat: added signal based ngrx to flight edit component"
+7	1	angular.json
+5	0	eslint.config.js
+16109	6756	package-lock.json
+68	26	package.json
+28	0	sheriff.config.ts
+1	1	src/app/app.config.ts
+5	0	src/app/domains/shared/ui-common/with-dev-tools-for-debug-mode.ts
+2	2	src/app/domains/shared/util-common/config-service.ts
+3	3	src/app/domains/shared/util-common/{language.ts.ts => language.ts}
+27	2	src/app/domains/ticketing/data/flight-client.ts
+17	10	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.ts
+8	8	src/app/domains/ticketing/feature-booking/flight-search/flight-search.ts
+108	48	src/app/domains/ticketing/feature-booking/flight-search/flight-store.ts
+5	0	src/environments/environment.development.ts
+5	0	src/environments/environment.ts
+6	1	tsconfig.json
+
+"rosa0922 <rohit.savalagi@netcracker.com>,Sat Aug 1 22:28:31 2026 +0530	bc4a21441835f6d500848e31597b9342b36ace9f,feat: added signal based ngrx to flight edit component"
+7	1	angular.json
+5	0	eslint.config.js
+16109	6756	package-lock.json
+28	0	sheriff.config.ts
+1	1	src/app/app.config.ts
+5	0	src/app/domains/shared/ui-common/with-dev-tools-for-debug-mode.ts
+2	2	src/app/domains/shared/util-common/config-service.ts
+3	3	src/app/domains/shared/util-common/{language.ts.ts => language.ts}
+27	2	src/app/domains/ticketing/data/flight-client.ts
+17	10	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.ts
+8	8	src/app/domains/ticketing/feature-booking/flight-search/flight-search.ts
+108	48	src/app/domains/ticketing/feature-booking/flight-search/flight-store.ts
+5	0	src/environments/environment.development.ts
+5	0	src/environments/environment.ts
+6	1	tsconfig.json
+
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Fri Jul 31 23:03:38 2026 +0530	7f43da56dd78c1885273f0c11b9f40ad09628287,Merge pull request #10 from RohitSavalagi/vitest"
+"rosa0922 <rohit.savalagi@netcracker.com>,Fri Jul 31 23:00:55 2026 +0530	2a4726960c93f348294a647a819a96f0be441c2e,feat: add Vitest support with Playwright integration"
+-	-	.vitest-attachments/018dfa13fed77088e428508d3fc0ec9528c82d31.png
+-	-	.vitest-attachments/2be22e13513f5cd69f63554e583261cf4db9a2af.png
+-	-	.vitest-attachments/9f8cda0cf629756429395790519feb7fb533352c.png
+-	-	.vitest-attachments/a3077721ba7fec80d3685ec16f4212c4bf156007.png
+-	-	.vitest-attachments/dc575cac3594431640ebba4a3457c8fe2a262540.png
+10	1	angular.json
+314	17	package-lock.json
+4	0	package.json
+1	1	src/app/app.spec.ts
+35	0	src/app/demo.spec.ts
+1	1	src/app/domains/ticketing/feature-booking/flight-search/flight-search.html
+82	0	src/app/domains/ticketing/feature-booking/flight-search/flight-search.spec.ts
+2	5	src/app/domains/ticketing/feature-booking/flight-search/flight-search.ts
+7	0	src/app/testing/create-test-flight.ts
+13	0	src/app/testing/provide-test-config.ts
+2	7	tsconfig.spec.json
+
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Fri Jul 31 13:12:05 2026 +0530	e661023a2b7b445f397807c21765f1f4055082f1,Merge pull request #9 from RohitSavalagi/form-custom-fields"
+"rosa0922 <rohit.savalagi@netcracker.com>,Fri Jul 31 13:09:50 2026 +0530	ff49e96b8543650748590e096877b79fb7047ae0,feat: add delay stepper component and integrate into flight form"
+9	0	src/app/domains/shared/ui-common/delay-stepper/delay-stepper.html
+28	0	src/app/domains/shared/ui-common/delay-stepper/delay-stepper.ts
+1	2	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.ts
+6	0	src/app/domains/ticketing/feature-booking/flight-edit/flight-form/flight-form.html
+14	3	src/app/domains/ticketing/feature-booking/flight-edit/flight-form/flight-form.ts
+
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Fri Jul 31 10:57:06 2026 +0530	36365afdf0de8e69e036e5717dba319fb1621f63,Merge pull request #8 from RohitSavalagi/form-metadata"
+"rosa0922 <rohit.savalagi@netcracker.com>,Fri Jul 31 10:55:16 2026 +0530	34a311a79c7bffef051f5aa15b11caf8b8a44442,feat: add city metadata handling to field metadata pane and validators"
+5	0	src/app/domains/shared/ui-forms/field-meta-data-pane/field-meta-data-pane.html
+2	0	src/app/domains/shared/ui-forms/field-meta-data-pane/field-meta-data-pane.ts
+12	0	src/app/domains/shared/util-common/properties.ts
+4	0	src/app/domains/ticketing/data/flight-validators.ts
+
+"rosa0922 <rohit.savalagi@netcracker.com>,Fri Jul 31 10:36:32 2026 +0530	a0f8c35381784086cf113d18a87b06b7fa91df67,feat: add field metadata pane to flight form and edit components"
+4	0	src/app/domains/shared/ui-forms/field-meta-data-pane/field-meta-data-pane.html
+18	0	src/app/domains/shared/ui-forms/field-meta-data-pane/field-meta-data-pane.ts
+1	1	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.ts
+11	3	src/app/domains/ticketing/feature-booking/flight-edit/flight-form/flight-form.html
+2	1	src/app/domains/ticketing/feature-booking/flight-edit/flight-form/flight-form.ts
+
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Fri Jul 31 10:25:46 2026 +0530	182411a414519bc6e09432e882313e31ae157253,Merge pull request #7 from RohitSavalagi/subforms"
+"rosa0922 <rohit.savalagi@netcracker.com>,Fri Jul 31 10:16:11 2026 +0530	849c5632cd9a3ee7b664a8a55133933371915dfd,feat: implement aircraft and flight forms with validation error handling"
+10	0	src/app/domains/ticketing/feature-booking/flight-edit/aircraft-form/aircraft-form.html
+13	0	src/app/domains/ticketing/feature-booking/flight-edit/aircraft-form/aircraft-form.ts
+3	77	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.html
+4	6	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.ts
+42	0	src/app/domains/ticketing/feature-booking/flight-edit/flight-form/flight-form.html
+13	0	src/app/domains/ticketing/feature-booking/flight-edit/flight-form/flight-form.ts
+21	0	src/app/domains/ticketing/feature-booking/flight-edit/prices-form/prices-form.html
+19	0	src/app/domains/ticketing/feature-booking/flight-edit/prices-form/prices-form.ts
+
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Fri Jul 31 09:42:28 2026 +0530	fbe172632d56614f6603b474a18c5824d4a683c1,Merge pull request #6 from RohitSavalagi/form-array-validation"
+"rosa0922 <rohit.savalagi@netcracker.com>,Fri Jul 31 09:41:09 2026 +0530	681a20820717b39c57070d2ba728c96a31e550e3,feat: add duplicate price validation to flight edit form"
+21	0	src/app/domains/ticketing/data/flight-validators.ts
+69	63	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.html
+4	3	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.ts
+
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Fri Jul 31 01:29:09 2026 +0530	caba5b02fcb64bcfac303d18de2e1c9399bbe937,Merge pull request #5 from RohitSavalagi/from-groups"
+"rosa0922 <rohit.savalagi@netcracker.com>,Fri Jul 31 01:28:40 2026 +0530	087546b8c1d1517815bdb4d89b020775c13c1747,Merge branch main into from-groups"
+"rosa0922 <rohit.savalagi@netcracker.com>,Fri Jul 31 01:20:56 2026 +0530	5ec540957f51de95e3dc133ef79a9d6d928cabbe,feat: add aircraft and price schemas with validation to flight edit form"
+7	0	src/app/domains/ticketing/data/aircraft-schema.ts
+13	0	src/app/domains/ticketing/data/price-schema.ts
+43	0	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.html
+14	1	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.ts
+
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Fri Jul 31 00:49:11 2026 +0530	c52dd829635ade4b674ffcae75a24aa6d23f80a2,Merge pull request #4 from RohitSavalagi/async-validators"
+"rosa0922 <rohit.savalagi@netcracker.com>,Fri Jul 31 00:46:26 2026 +0530	97f540b1105b5783949f9b08f93b44154aeb97c3,feat: implement async city validation and HTTP request validation for flight form"
+73	1	src/app/domains/ticketing/data/flight-validators.ts
+4	0	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.html
+4	3	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.ts
+
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Fri Jul 31 00:29:48 2026 +0530	38d15f2066bdf8ea06a86ebab297dd260d0d55c4,Merge pull request #3 from RohitSavalagi/custom-validations"
+"rosa0922 <rohit.savalagi@netcracker.com>,Fri Jul 31 00:26:40 2026 +0530	5016ad164ffbf39cc6f499a5b96bdd81d85cb40e,feat: add round trip validation functions and integrate into flight schema"
+52	1	src/app/domains/ticketing/data/flight-validators.ts
+6	6	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.html
+12	2	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.ts
+
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Fri Jul 31 00:06:10 2026 +0530	f4a231e24af84b93abe55bea3b95ed8cb22ca682,Merge pull request #2 from RohitSavalagi/signal-based-forms"
+"rosa0922 <rohit.savalagi@netcracker.com>,Fri Jul 31 00:02:31 2026 +0530	5b99082534dbe132d3457950bcd1938718f7d843,feat: enhance flight editing with validation, error handling, and signal-based forms integration"
+10	0	src/app/app.config.ts
+7	0	src/app/domains/shared/ui-forms/validation-errors/validation-errors-pane/validation-errors-pane.html
+42	0	src/app/domains/shared/ui-forms/validation-errors/validation-errors-pane/validation-errors-pane.ts
+18	0	src/app/domains/shared/util-common/date-utils.ts
+6	0	src/app/domains/shared/util-common/extract-error.ts
+45	2	src/app/domains/ticketing/data/flight-client.ts
+16	0	src/app/domains/ticketing/data/flight-validators.ts
+58	2	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.html
+95	2	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.ts
+62	0	src/app/domains/ticketing/feature-booking/flight-edit/simple-flight-detail-store.ts
+0	3	src/app/domains/ticketing/feature-booking/flight-search/flight-search.ts
+10	0	src/styles.css
+
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Thu Jul 30 21:39:13 2026 +0530	d96dcb999bb3bc68d3cb3d29f53b3115eea08598,Merge pull request #1 from RohitSavalagi/delegated-signal"
+"rosa0922 <rohit.savalagi@netcracker.com>,Thu Jul 30 21:37:15 2026 +0530	32986202b4ec9848e0bbed300c48961a0ef447a8,feat: implement delegatedSignal utility and integrate it into flight search component"
+18	0	src/app/domains/shared/util-common/delegated-signal.ts
+18	6	src/app/domains/ticketing/feature-booking/flight-search/flight-search.ts
+
+"rosa0922 <rohit.savalagi@netcracker.com>,Wed Jul 29 03:06:09 2026 +0530	b71f1120d95cd2fdcdac60e9acf30322edaef824,simple store provided via services"
+14	3	src/app/app.config.ts
+6	0	src/app/domains/shared/util-common/config-service.ts
+18	0	src/app/domains/shared/util-common/language.ts.ts
+4	5	src/app/domains/ticketing/data/flight-client.ts
+1	5	src/app/domains/ticketing/feature-booking/flight-search/flight-search.html
+40	55	src/app/domains/ticketing/feature-booking/flight-search/flight-search.ts
+64	0	src/app/domains/ticketing/feature-booking/flight-search/flight-store.ts
+
+"rosa0922 <rohit.savalagi@netcracker.com>,Wed Jul 29 02:49:18 2026 +0530	061c1021ba83acabe3ea163b639c3048058f38f7,added routing and and a service"
+7	2	src/app/app.config.ts
+1	1	src/app/app.html
+30	1	src/app/app.routes.ts
+2	2	src/app/app.ts
+35	0	src/app/domains/ticketing/data/flight-client.ts
+16	0	src/app/domains/ticketing/feature-booking/booking-navigation.html
+9	0	src/app/domains/ticketing/feature-booking/booking-navigation.ts
+3	0	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.html
+21	0	src/app/domains/ticketing/feature-booking/flight-edit/flight-edit.ts
+9	3	src/app/domains/ticketing/feature-booking/flight-search/flight-search.html
+10	31	src/app/domains/ticketing/feature-booking/flight-search/flight-search.ts
+1	0	src/app/domains/ticketing/feature-booking/passenger-search/passenger-search.html
+8	0	src/app/domains/ticketing/feature-booking/passenger-search/passenger-search.ts
+28	0	src/app/domains/ticketing/ticketing.routes.ts
+1	0	src/app/domains/ticketing/ui/flight-card/flight-card.html
+1	0	src/app/shell/about/about.html
+8	0	src/app/shell/about/about.ts
+1	0	src/app/shell/home/home.html
+8	0	src/app/shell/home/home.ts
+7	15	src/app/shell/sidebar/sidebar.html
+2	1	src/app/shell/sidebar/sidebar.ts
+
+"rosa0922 <rohit.savalagi@netcracker.com>,Wed Jul 29 02:04:17 2026 +0530	2c1dd438092527c153914f7b322e7f0b0e75400b,reactiveness of signals: computed signals"
+2	1	angular.json
+37	0	src/app/domains/ticketing/data/flight-zod-schema.ts
+12	26	src/app/domains/ticketing/feature-booking/flight-search/flight-search.html
+42	4	src/app/domains/ticketing/feature-booking/flight-search/flight-search.ts
+19	0	src/app/domains/ticketing/ui/flight-card/flight-card.html
+22	0	src/app/domains/ticketing/ui/flight-card/flight-card.ts
+
+"rosa0922 <rohit.savalagi@netcracker.com>,Wed Jul 29 01:31:44 2026 +0530	dd0df6a978822e56b4a280d303d4a05939e8692d,httpClient to httpResource transition"
+16	4	src/app/domains/ticketing/feature-booking/flight-search/flight-search.html
+38	22	src/app/domains/ticketing/feature-booking/flight-search/flight-search.ts
+
+"rosa0922 <rohit.savalagi@netcracker.com>,Tue Jul 28 23:18:46 2026 +0530	f1812970ba98da8e4faf9ac8849a6ec027731c7d,feat: implement flight search API integration with httpClient and remove mock data"
+19	33	src/app/domains/ticketing/feature-booking/flight-search/flight-search.ts
+
+"rosa0922 <rohit.savalagi@netcracker.com>,Tue Jul 28 23:02:58 2026 +0530	f00043fee295b4310a90bec28a2a7eae38d337bd,feat: flight search component added with mock data"
+24	2	angular.json
+41	0	eslint.config.js
+1843	72	package-lock.json
+6	1	package.json
+2	1	src/app/app.html
+4	2	src/app/app.ts
+8	0	src/app/domains/ticketing/data/aircraft.ts
+23	0	src/app/domains/ticketing/data/flight.ts
+4	0	src/app/domains/ticketing/data/price.ts
+50	0	src/app/domains/ticketing/feature-booking/flight-search/flight-search.html
+64	0	src/app/domains/ticketing/feature-booking/flight-search/flight-search.ts
+
+"rosa0922 <rohit.savalagi@netcracker.com>,Tue Jul 28 22:37:59 2026 +0530	1c84ea25ea446aefcf76f7cc198db26b4c3c4afb,Merge branch 'main' of https://github.com/RohitSavalagi/modern-angular"
+"RohitSavalagi <91047205+RohitSavalagi@users.noreply.github.com>,Tue Jul 28 22:30:26 2026 +0530	63bfd032155dafe1aa4f741186fee8206c1bc4c7,Initial commit"
+1	0	README.md
+
+"rosa0922 <rohit.savalagi@netcracker.com>,Tue Jul 28 22:29:42 2026 +0530	6546963c5630e481489a68421583ca67c5b3932e,Initial Setup"
+1	3	angular.json
+54	2	package-lock.json
+4	1	package.json
+8	341	src/app/app.html
+13	4	src/app/app.ts
+15	0	src/app/shell/navbar/navbar.html
+30	0	src/app/shell/navbar/navbar.ts
+27	0	src/app/shell/sidebar/sidebar.html
+9	0	src/app/shell/sidebar/sidebar.ts
+17	10	src/index.html
+38	0	src/material-theme.scss
+1202	0	src/styles.css
+
+"rosa0922 <rohit.savalagi@netcracker.com>,Tue Jul 28 21:08:10 2026 +0530	f8dacf8a5857c072693ea1dfbdcc52f839a8185f,initial commit"
+17	0	.editorconfig
+44	0	.gitignore
+12	0	.prettierrc
+4	0	.vscode/extensions.json
+20	0	.vscode/launch.json
+42	0	.vscode/tasks.json
+59	0	README.md
+73	0	angular.json
+8227	0	package-lock.json
+32	0	package.json
+-	-	public/favicon.ico
+11	0	src/app/app.config.ts
+0	0	src/app/app.css
+344	0	src/app/app.html
+3	0	src/app/app.routes.ts
+23	0	src/app/app.spec.ts
+12	0	src/app/app.ts
+13	0	src/index.html
+6	0	src/main.ts
+1	0	src/styles.css
+14	0	tsconfig.app.json
+31	0	tsconfig.json
+15	0	tsconfig.spec.json
