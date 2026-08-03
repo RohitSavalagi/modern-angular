@@ -2,12 +2,13 @@ import { Component, inject, signal } from '@angular/core';
 import { Navbar } from './shell/navbar/navbar';
 import { Sidebar } from './shell/sidebar/sidebar';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { AssistantChat } from '@flight/shared/ui-assistant/assistant-chat/assistant-chat';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css',
-  imports: [Navbar, Sidebar, RouterOutlet],
+  imports: [Navbar, Sidebar, RouterOutlet, AssistantChat],
 })
 export class App {
   protected readonly title = signal('Flights');
